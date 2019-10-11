@@ -9,6 +9,7 @@ import quickdt.predictiveModels.PredictiveModelBuilder;
 import javax.annotation.Nullable;
 import java.io.PrintStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -97,5 +98,36 @@ public class FeatureEngineeringPredictiveModelBuilderTest {
         }
     }
 
+    @Test(expectedExceptions = UnsupportedOperationException.class)
+    public void updatableInputFalseOutputUnsupportedOperationException() {
+      final ArrayList arrayList = new ArrayList();
+      arrayList.add(0);
+      arrayList.add(0);
+      final FeatureEngineeringPredictiveModelBuilder featureEngineeringPredictiveModelBuilder = new FeatureEngineeringPredictiveModelBuilder(null, arrayList);
+      featureEngineeringPredictiveModelBuilder.updatable(false);
+    }
+
+    @Test(expectedExceptions = UnsupportedOperationException.class)
+    public void updatableInputFalseOutputUnsupportedOperationException1() throws Exception {
+      final ArrayList arrayList = new ArrayList();
+      final FeatureEngineeringPredictiveModelBuilder featureEngineeringPredictiveModelBuilder2 = new FeatureEngineeringPredictiveModelBuilder(null, arrayList);
+      final ArrayList arrayList1 = new ArrayList();
+      final FeatureEngineeringPredictiveModelBuilder featureEngineeringPredictiveModelBuilder1 = new FeatureEngineeringPredictiveModelBuilder(featureEngineeringPredictiveModelBuilder2, arrayList1);
+      final ArrayList arrayList2 = new ArrayList();
+      final FeatureEngineeringPredictiveModelBuilder featureEngineeringPredictiveModelBuilder = new FeatureEngineeringPredictiveModelBuilder(featureEngineeringPredictiveModelBuilder1, arrayList2);
+      featureEngineeringPredictiveModelBuilder.updatable(false);
+    }
+
+    @Test(expectedExceptions = UnsupportedOperationException.class)
+    public void updatableInputFalseOutputUnsupportedOperationException2() throws Exception {
+      final ArrayList arrayList = new ArrayList();
+      final FeatureEngineeringPredictiveModelBuilder featureEngineeringPredictiveModelBuilder2 = new FeatureEngineeringPredictiveModelBuilder(null, arrayList);
+      final ArrayList arrayList1 = new ArrayList();
+      arrayList1.add(0);
+      final FeatureEngineeringPredictiveModelBuilder featureEngineeringPredictiveModelBuilder1 = new FeatureEngineeringPredictiveModelBuilder(featureEngineeringPredictiveModelBuilder2, arrayList1);
+      final ArrayList arrayList2 = new ArrayList();
+      final FeatureEngineeringPredictiveModelBuilder featureEngineeringPredictiveModelBuilder = new FeatureEngineeringPredictiveModelBuilder(featureEngineeringPredictiveModelBuilder1, arrayList2);
+      featureEngineeringPredictiveModelBuilder.updatable(false);
+    }
 }
 

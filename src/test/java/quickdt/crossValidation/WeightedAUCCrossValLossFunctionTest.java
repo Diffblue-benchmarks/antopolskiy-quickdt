@@ -192,4 +192,136 @@ public class WeightedAUCCrossValLossFunctionTest {
         double acceptableDifference = 0.000000000001;
         Assert.assertTrue(Math.abs(mahoutAucLoss - aucCrossValLoss) < acceptableDifference);
     }
+
+    @Test
+    public void getAUCPointInputPositivePositiveNegativeNegativeOutputNotNull() {
+      final WeightedAUCCrossValLossFunction weightedAUCCrossValLossFunction = new WeightedAUCCrossValLossFunction(false);
+      final WeightedAUCCrossValLossFunction.AUCPoint actual = weightedAUCCrossValLossFunction.getAUCPoint(65536.0, 1.0, -32.0, -65536.0);
+      Assert.assertNotNull(actual);
+      Assert.assertEquals(-0x1.0842108421084p-5 /* -0.0322581 */, actual.getFalsePositiveRate(), 0.0);
+      Assert.assertEquals(0.0, actual.getTruePositiveRate(), 0.0);
+    }
+
+    @Test
+    public void getAUCPointInputZeroPositiveNegativePositiveOutputNotNull() {
+      final WeightedAUCCrossValLossFunction weightedAUCCrossValLossFunction = new WeightedAUCCrossValLossFunction(false);
+      final WeightedAUCCrossValLossFunction.AUCPoint actual = weightedAUCCrossValLossFunction.getAUCPoint(0.0, 1.0, -32.0, 1.0);
+      Assert.assertNotNull(actual);
+      Assert.assertEquals(-0x1.0842108421084p-5 /* -0.0322581 */, actual.getFalsePositiveRate(), 0.0);
+      Assert.assertEquals(0.0, actual.getTruePositiveRate(), 0.0);
+    }
+
+    @Test
+    public void getAUCPointInputZeroZeroZeroZeroOutputNotNull() {
+      final WeightedAUCCrossValLossFunction weightedAUCCrossValLossFunction = new WeightedAUCCrossValLossFunction(false);
+      final WeightedAUCCrossValLossFunction.AUCPoint actual = weightedAUCCrossValLossFunction.getAUCPoint(0.0, 0.0, 0.0, 0.0);
+      Assert.assertNotNull(actual);
+      Assert.assertEquals(0.0, actual.getFalsePositiveRate(), 0.0);
+      Assert.assertEquals(0.0, actual.getTruePositiveRate(), 0.0);
+    }
+
+    @Test
+    public void getAUCPointsFromDataInputNotNullOutput1() {
+      final WeightedAUCCrossValLossFunction weightedAUCCrossValLossFunction = new WeightedAUCCrossValLossFunction(false);
+      final ArrayList<WeightedAUCCrossValLossFunction.AUCData> aucDataList = new ArrayList<WeightedAUCCrossValLossFunction.AUCData>();
+      final ArrayList<WeightedAUCCrossValLossFunction.AUCPoint> actual = weightedAUCCrossValLossFunction.getAUCPointsFromData(aucDataList);
+      Assert.assertNotNull(actual);
+      Assert.assertEquals(1, actual.size());
+      Assert.assertNotNull(actual.get(0));
+      Assert.assertEquals(0.0, actual.get(0).getFalsePositiveRate(), 0.0);
+      Assert.assertEquals(0.0, actual.get(0).getTruePositiveRate(), 0.0);
+    }
+
+    @Test
+    public void getAUCPointsFromDataInputNotNullOutput11() {
+      final WeightedAUCCrossValLossFunction weightedAUCCrossValLossFunction = new WeightedAUCCrossValLossFunction(false);
+      final ArrayList<WeightedAUCCrossValLossFunction.AUCData> aucDataList = new ArrayList<WeightedAUCCrossValLossFunction.AUCData>();
+      final ArrayList<WeightedAUCCrossValLossFunction.AUCPoint> actual = weightedAUCCrossValLossFunction.getAUCPointsFromData(aucDataList);
+      Assert.assertNotNull(actual);
+      Assert.assertEquals(1, actual.size());
+      Assert.assertNotNull(actual.get(0));
+      Assert.assertEquals(0.0, actual.get(0).getFalsePositiveRate(), 0.0);
+    }
+
+    @Test
+    public void getAUCPointsFromDataInputNotNullOutput12() {
+      final WeightedAUCCrossValLossFunction weightedAUCCrossValLossFunction = new WeightedAUCCrossValLossFunction(false);
+      final ArrayList<WeightedAUCCrossValLossFunction.AUCData> aucDataList = new ArrayList<WeightedAUCCrossValLossFunction.AUCData>();
+      final WeightedAUCCrossValLossFunction.AUCData weightedAUCCrossValLossFunction$AUCData = new WeightedAUCCrossValLossFunction.AUCData(false, 1.0, 0.0);
+      aucDataList.add(weightedAUCCrossValLossFunction$AUCData);
+      final ArrayList<WeightedAUCCrossValLossFunction.AUCPoint> actual = weightedAUCCrossValLossFunction.getAUCPointsFromData(aucDataList);
+      Assert.assertNotNull(actual);
+      Assert.assertEquals(1, actual.size());
+      Assert.assertNotNull(actual.get(0));
+      Assert.assertEquals(0.0, actual.get(0).getFalsePositiveRate(), 0.0);
+      Assert.assertEquals(0.0, actual.get(0).getTruePositiveRate(), 0.0);
+    }
+
+    @Test
+    public void getAUCPointsFromDataInputNotNullOutput13() {
+      final WeightedAUCCrossValLossFunction weightedAUCCrossValLossFunction = new WeightedAUCCrossValLossFunction(true);
+      final ArrayList<WeightedAUCCrossValLossFunction.AUCData> aucDataList = new ArrayList<WeightedAUCCrossValLossFunction.AUCData>();
+      final WeightedAUCCrossValLossFunction.AUCData weightedAUCCrossValLossFunction$AUCData = new WeightedAUCCrossValLossFunction.AUCData(false, 4.0, 0.0);
+      aucDataList.add(weightedAUCCrossValLossFunction$AUCData);
+      final ArrayList<WeightedAUCCrossValLossFunction.AUCPoint> actual = weightedAUCCrossValLossFunction.getAUCPointsFromData(aucDataList);
+      Assert.assertNotNull(actual);
+      Assert.assertEquals(1, actual.size());
+      Assert.assertNotNull(actual.get(0));
+      Assert.assertEquals(0.0, actual.get(0).getFalsePositiveRate(), 0.0);
+      Assert.assertEquals(0.0, actual.get(0).getTruePositiveRate(), 0.0);
+    }
+
+    @Test
+    public void getAUCPointsFromDataInputNotNullOutput2() {
+      final WeightedAUCCrossValLossFunction weightedAUCCrossValLossFunction = new WeightedAUCCrossValLossFunction(false);
+      final ArrayList<WeightedAUCCrossValLossFunction.AUCData> aucDataList = new ArrayList<WeightedAUCCrossValLossFunction.AUCData>();
+      final WeightedAUCCrossValLossFunction.AUCData weightedAUCCrossValLossFunction$AUCData = new WeightedAUCCrossValLossFunction.AUCData(false, 1.0, 0x1.00007ffcp+30 /* 1.07375e+09 */);
+      aucDataList.add(weightedAUCCrossValLossFunction$AUCData);
+      final ArrayList<WeightedAUCCrossValLossFunction.AUCPoint> actual = weightedAUCCrossValLossFunction.getAUCPointsFromData(aucDataList);
+      Assert.assertNotNull(actual);
+      Assert.assertEquals(2, actual.size());
+      Assert.assertNotNull(actual.get(0));
+      Assert.assertEquals(0.0, actual.get(0).getFalsePositiveRate(), 0.0);
+      Assert.assertEquals(1.0, actual.get(0).getTruePositiveRate(), 0.0);
+      Assert.assertNotNull(actual.get(1));
+      Assert.assertEquals(0.0, actual.get(1).getFalsePositiveRate(), 0.0);
+      Assert.assertEquals(0.0, actual.get(1).getTruePositiveRate(), 0.0);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getLossInputNotNullNullOutputIllegalStateException() {
+      final WeightedAUCCrossValLossFunction weightedAUCCrossValLossFunction = new WeightedAUCCrossValLossFunction(null);
+      final ArrayList instances = new ArrayList();
+      weightedAUCCrossValLossFunction.getLoss(instances, null);
+    }
+
+    @Test
+    public void getFalsePositiveRateOutputZero() {
+      final WeightedAUCCrossValLossFunction.AUCPoint weightedAUCCrossValLossFunctionAUCPoint = new WeightedAUCCrossValLossFunction.AUCPoint(0.0, 0.0);
+      Assert.assertEquals(0.0, weightedAUCCrossValLossFunctionAUCPoint.getFalsePositiveRate(), 0.0);
+    }
+
+    @Test
+    public void getTruePositiveRateOutputZero() {
+      final WeightedAUCCrossValLossFunction.AUCPoint weightedAUCCrossValLossFunctionAUCPoint = new WeightedAUCCrossValLossFunction.AUCPoint(0.0, 0.0);
+      Assert.assertEquals(0.0, weightedAUCCrossValLossFunctionAUCPoint.getTruePositiveRate(), 0.0);
+    }
+
+    @Test
+    public void getClassificationOutputFalse() {
+      final WeightedAUCCrossValLossFunction.AUCData weightedAUCCrossValLossFunctionAUCData = new WeightedAUCCrossValLossFunction.AUCData(false, 0.0, 0.0);
+      Assert.assertFalse((boolean) weightedAUCCrossValLossFunctionAUCData.getClassification());
+    }
+
+    @Test
+    public void getProbabilityOutputZero() {
+      final WeightedAUCCrossValLossFunction.AUCData weightedAUCCrossValLossFunctionAUCData = new WeightedAUCCrossValLossFunction.AUCData(false, 0.0, 0.0);
+      Assert.assertEquals(0.0, weightedAUCCrossValLossFunctionAUCData.getProbability(), 0.0);
+    }
+
+    @Test
+    public void getWeightOutputZero() {
+      final WeightedAUCCrossValLossFunction.AUCData weightedAUCCrossValLossFunctionAUCData = new WeightedAUCCrossValLossFunction.AUCData(false, 0.0, 0.0);
+      Assert.assertEquals(0.0, weightedAUCCrossValLossFunctionAUCData.getWeight(), 0.0);
+    }
 }
